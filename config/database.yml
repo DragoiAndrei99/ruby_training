@@ -6,11 +6,17 @@ default: &default
 development:
   <<: *default
   database: training_demo_development
+  username: <%= ENV["PGUSER"] || "postgres" %>
+  password: <%= ENV["PGPASSWORD"] || "" %>
 
 test:
   <<: *default
   database: training_demo_test
+  username: <%= ENV["PGUSER"] || "postgres" %>
+  password: <%= ENV["PGPASSWORD"] || "" %>
 
 production:
-  <<: *default
+  adapter: postgresql
   url: <%= ENV["DATABASE_URL"] %>
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
