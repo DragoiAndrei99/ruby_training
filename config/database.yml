@@ -9,11 +9,12 @@ development:
 
 test:
   <<: *default
-  database: training_demo_tests
+  database: training_demo_test
 
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
 
-  cable:
+cable:
+  production:
     url: <%= ENV['DATABASE_URL'] %>
